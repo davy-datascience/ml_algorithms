@@ -12,12 +12,15 @@ nb_epochs = 1000
 # Read the data
 dataset = pd.read_csv("https://raw.githubusercontent.com/davy-datascience/portfolio/master/LinearRegression/Approach-1/dataset/Salary_Data.csv")
 
-# Separation independent variable X - dependent variable y
-X = dataset.YearsExperience
-y = dataset.Salary
-
 # Separate the dataset into a training set and a test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+train, test = train_test_split(dataset, test_size = 0.2)
+
+# Separation independent variable X - dependent variable y for the train set & the test set
+X_train = train.YearsExperience
+y_train = train.Salary
+
+X_test = test.YearsExperience
+y_test = test.Salary
 
 # Looking for 1st line equation
 # The line must have the same scope than the scatter plots from the dataset
@@ -37,7 +40,7 @@ drawAll(X_train, y_train, line)
 
 # Iterate choosing a random point and moving the line with the function transformLine
 for i in progressbar.progressbar(range(nb_epochs)):
-    sample = dataset.sample()
+    sample = train.sample()
     point = Point(sample.YearsExperience, sample.Salary)
     line = transformLine(point, line, X_train.median(), learning_rate)
     #drawAll(X_train, y_train, line)    # Uncomment this line to see the line at each iteration
