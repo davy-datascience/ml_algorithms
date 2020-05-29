@@ -25,6 +25,7 @@ def transformLine(x, y, categUp, lineCoefs, learning_rate):
     
     position = lineCoefs[0] * x + lineCoefs[1] *y + lineCoefs[2]
     
+    # Look if the point is incorrectly classified, if so move the line towards point
     if position > 0 and not categUp :
         lineCoefs[0] -= x * learning_rate
         lineCoefs[1] += y * learning_rate
@@ -37,7 +38,7 @@ def transformLine(x, y, categUp, lineCoefs, learning_rate):
     return lineCoefs
 
 def predict(X, lineCoefs):
-    """ I use my model (the equation of the line) to predict new values """
+    """ I use my model (the equation of the line) to predict which specy a new set of values belongs to  """
     prediction = []
     
     a = lineCoefs[0]
@@ -47,6 +48,8 @@ def predict(X, lineCoefs):
     for row in X.iterrows():
         x = row[1].loc["sep_long"]
         y = row[1].loc["pet_larg"]
+        
+        # The result of the equation ax + by+ c = 0 tells if the point is in category 1 (positive) or category 0 (negative)
         position = a * x + b * y + c
         prediction.append(position > 0)
 
