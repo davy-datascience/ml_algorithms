@@ -19,3 +19,7 @@ I also provided the python source code for each production.
 ### Logistic Regression
 
 ##### Approach 1 : percetron algorithm
+
+### Projects
+
+##### Work in progress ...
